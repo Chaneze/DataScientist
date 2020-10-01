@@ -4,7 +4,7 @@ def create_handle
 end
 
 def ask_questions
-	puts "A quelle question souhaites-tu que nous repondions ? Saisie le nombre correspondant :"
+	puts "Saisir le nombre correspondant à la question à laquelle tu souhaites que nous repondions :"
 	puts "1 Combien y a-t-il de handle dans cette array ?"
 	puts "2 Quelle est le handle le plus court de cette liste ?"
 	puts "3 Combien y-a-t'il de handle contenant 5 caractères"
@@ -19,21 +19,21 @@ def ask_questions
 	if question >= 0 && question <= 8
 		return question
 	else
-		puts "Il fallait saisir un nombre entre 1 et 8"
+		puts "Il fallait saisir un nombre entre 0 et 8"
 		return (-1)
 	end
 end
 
 def array_length(handle)
 	puts "-------------------"
-	puts "The size of the array is :"
+	puts "Le nombre de handle dans cet array est :"
 	puts handle.length
 	puts "-------------------"
 end
 
 def smallest_string(handle)
 	puts "-------------------"
-	puts "The smallest handle is :"
+	puts "Le handle le plus court de cette liste est :"
 	size = 100
 	handle.each do |string|
 		if string.length < size
@@ -50,7 +50,7 @@ end
 
 def handle_size(handle, size)
 	puts "-------------------"
-	puts "The handle with a size of #{size} are :"
+	puts "Le nombre de handle comportant #{size} caractères dans cet array est :"
 	handle.each do |string|
 		if (string.length - 1) == size
 			puts string
@@ -61,18 +61,20 @@ end
 
 def upper_case(handle)
 	puts "-------------------"
-	puts "The handle with an upper case after @ are :"
+	puts "Le nombre de handle commencant par une majuscule est :"
+	i = 0
 	handle.each do |string|
 		if string[1] == string[1].upcase
-			puts string
+			i = i + 1
 		end
     end
+    puts i
     puts "-------------------"
 end
 
 def sorted_handle_alpha(handle)
 	puts "-------------------"
-	puts "The alphabetical sorted array is :"
+	puts "La liste de handle trié par ordre alphabétique est :"
 	sorted = handle.sort_by { |word| word.downcase }
 	sorted.each do |string|
 		puts string
@@ -82,7 +84,7 @@ end
 
 def sorted_handle_size(handle)
 	puts "-------------------"
-	puts "The length sorted array is :"
+	puts "La liste de handle trié par taille est :"
 	sorted = handle.sort_by {|x| x.length}
 	sorted.each do |string|
 		puts string
@@ -90,7 +92,39 @@ def sorted_handle_size(handle)
     puts "-------------------"
 end
 
+def find_handle(handle)
+	puts "-------------------"
+	puts "La position du handle @epenser est :"
+	i = 0
+	while handle[i] != "@epenser"
+		i = i + 1
+    end
+    puts i + 1
+    puts "-------------------"
+end
+
+def repartition_handle(handle)
+	puts "-------------------"
+	puts "La repartition par taille des handle est :"
+	sum_count = 0
+	length = handle.length
+	size = 1
+	while sum_count != length
+		count = 0
+		handle.each do |string|
+			if (string.length) == size
+				count = count + 1
+			end
+    	end
+		puts "Il y a #{count} handle de #{size} caractère"
+		size = size + 1
+		sum_count = sum_count + count
+    end
+    puts "-------------------"
+end
+
 def answer_question(question, handle)
+	puts ""
 	if question == 1
 		array_length(handle)
 	elsif question == 2
@@ -103,9 +137,12 @@ def answer_question(question, handle)
 		sorted_handle_alpha(handle)
 	elsif question == 6
 		sorted_handle_size(handle)
-	#elsif question == 7
-	#else
+	elsif question == 7
+		find_handle(handle)
+	else
+		repartition_handle(handle)
 	end
+	puts ""
 end
 
 def perform
@@ -113,6 +150,8 @@ def perform
 	while ((question = ask_questions) != 0)
 		answer_question(question, handle)
 	end
+	puts ""
+	puts "Merci et au revoir"
 end
 
 perform

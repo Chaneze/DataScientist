@@ -8,8 +8,25 @@ def create_value_crypto
 	return value_crypto
 end
 
+def ask_questions
+	puts "Saisir le nombre correspondant à la question à laquelle tu souhaites que nous repondions :"
+	puts "1 La ou les crypto qui ont la plus grosse valeur."
+	puts "2 La ou les crypto qui ont la plus petite valeur."
+	puts "3 Les devises dont le cours est inférieur à 6000"
+	puts "4 La devise la plus chère parmi celles dont le cours est inférieur à 6000."
+	puts "0 Exit"
+	print "> "
+	question = gets.chomp.to_i
+	if question >= 0 && question <= 4
+		return question
+	else
+		puts "Il fallait saisir un nombre entre 0 et 4"
+		return (-1)
+	end
+end
+
 def highest_value(my_hash)
-	puts "Currencies with the highest value are :"
+	puts "La ou les crypto qui ont la plus grosse valeur sont :"
 	max_value = 0.0
 	my_hash.each do |key, value|
 		if value.to_f > max_value
@@ -25,7 +42,7 @@ def highest_value(my_hash)
 end
 
 def lowest_value(my_hash)
-	puts "Currenies with the lowest value are :"
+	puts "La ou les crypto qui ont la plus petite valeur sont :"
 	min_value = 100.0
 	my_hash.each do |key, value|
 		if value.to_f < min_value
@@ -41,7 +58,7 @@ def lowest_value(my_hash)
 end
 
 def lowest_to_value(my_hash, value_to_compare)
-	puts "Currenies with a value under #{value_to_compare} are :"
+	puts "Les devises dont le cours est inférieur à #{value_to_compare} sont :"
 	my_hash.each do |key, value|
 		if value.to_f < value_to_compare
 			puts key
@@ -51,7 +68,7 @@ def lowest_to_value(my_hash, value_to_compare)
 end
 
 def bigger_among_lowest_to_value(my_hash, value_to_compare)
-	puts "Highest currencies with a value under #{value_to_compare} are :"
+	puts "La devise la plus chère parmi celles dont le cours est inférieur à #{value_to_compare} est :"
 	max_value = 0.0
 	my_hash.each do |key, value|
 		if value.to_f > max_value && value.to_f < value_to_compare
@@ -66,15 +83,30 @@ def bigger_among_lowest_to_value(my_hash, value_to_compare)
     puts "-------------------"
 end
 
+def answer_question(question, my_hash)
+	puts ""
+	value_to_compare = 6000
+	if question == 1
+		highest_value(my_hash)
+	elsif question == 2
+		lowest_value(my_hash)
+	elsif question == 3
+    	lowest_to_value(my_hash, value_to_compare)
+	else
+		bigger_among_lowest_to_value(my_hash, value_to_compare)
+	end
+	puts ""
+end
+
 def perform
 	name_crypto = create_name_crypto
 	value_crypto = create_value_crypto
 	my_hash = Hash[name_crypto.zip value_crypto]
-    highest_value(my_hash)
-    lowest_value(my_hash)
-    value_to_compare = 6000
-    #lowest_to_value(my_hash, value_to_compare)
-    #bigger_among_lowest_to_value(my_hash, value_to_compare)
+	while ((question = ask_questions) != 0)
+		answer_question(question, my_hash)
+	end
+	puts ""
+	puts "Merci et au revoir"
 end
 
 perform
