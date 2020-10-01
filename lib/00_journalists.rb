@@ -70,6 +70,26 @@ def upper_case(handle)
     puts "-------------------"
 end
 
+def sorted_handle_alpha(handle)
+	puts "-------------------"
+	puts "The alphabetical sorted array is :"
+	sorted = handle.sort_by { |word| word.downcase }
+	sorted.each do |string|
+		puts string
+    end
+    puts "-------------------"
+end
+
+def sorted_handle_size(handle)
+	puts "-------------------"
+	puts "The length sorted array is :"
+	sorted = handle.sort_by {|x| x.length}
+	sorted.each do |string|
+		puts string
+    end
+    puts "-------------------"
+end
+
 def answer_question(question, handle)
 	if question == 1
 		array_length(handle)
@@ -79,8 +99,10 @@ def answer_question(question, handle)
 		handle_size(handle, 5)
 	elsif question == 4
 		upper_case(handle)
-	#elsif question == 5
-	#elsif question == 6
+	elsif question == 5
+		sorted_handle_alpha(handle)
+	elsif question == 6
+		sorted_handle_size(handle)
 	#elsif question == 7
 	#else
 	end
