@@ -35,7 +35,7 @@ def highest_value(my_hash)
 	end
 	my_hash.each do |key, value|
 		if value.to_f == max_value
-			puts key
+			puts key + " with a value of : " + value
 		end
     end
     puts "-------------------"
@@ -51,7 +51,7 @@ def lowest_value(my_hash)
 	end
 	my_hash.each do |key, value|
 		if value.to_f == min_value
-			puts key
+			puts key + " with a value of : " + value
 		end
     end
     puts "-------------------"
@@ -61,7 +61,7 @@ def lowest_to_value(my_hash, value_to_compare)
 	puts "Les devises dont le cours est inférieur à #{value_to_compare} sont :"
 	my_hash.each do |key, value|
 		if value.to_f < value_to_compare
-			puts key
+			puts key + " with a value of : " + value
 		end
     end
     puts "-------------------"
