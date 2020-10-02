@@ -59,11 +59,14 @@ end
 
 def lowest_to_value(my_hash, value_to_compare)
 	puts "Les devises dont le cours est inférieur à #{value_to_compare} sont :"
+	count = 0
 	my_hash.each do |key, value|
 		if value.to_f < value_to_compare
 			puts key + " with a value of : " + value
+			count = count + 1
 		end
     end
+    puts "Il y a #{count} currencies avec une valeur inf à #{value_to_compare}"
     puts "-------------------"
 end
 
