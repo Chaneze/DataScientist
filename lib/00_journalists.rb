@@ -101,7 +101,7 @@ def find_handle(handle)
 	while handle[i] != "@epenser"
 		i = i + 1
     end
-    puts i + 1
+    puts "i vaut #{i} donc il est en position #{i + 1} puisque i part de 0"
     puts "-------------------"
 end
 
