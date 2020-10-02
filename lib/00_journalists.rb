@@ -110,7 +110,7 @@ def repartition_handle(handle)
 	puts "La repartition par taille des handle est :"
 	sum_count = 0
 	length = handle.length
-	size = 1
+	size = 2
 	while sum_count != length
 		count = 0
 		handle.each do |string|
@@ -118,7 +118,7 @@ def repartition_handle(handle)
 				count = count + 1
 			end
     	end
-		puts "Il y a #{count} handle de #{size} caractère"
+		puts "Il y a #{count} handle de #{size - 1} caractère"
 		size = size + 1
 		sum_count = sum_count + count
     end
