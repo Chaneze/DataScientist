@@ -51,11 +51,13 @@ end
 def handle_size(handle, size)
 	puts "-------------------"
 	puts "Le nombre de handle comportant #{size} caractères dans cet array est :"
+	count = 0
 	handle.each do |string|
 		if (string.length - 1) == size
-			puts string
+			count = count + 1
 		end
     end
+    puts count
     puts "-------------------"
 end
 
